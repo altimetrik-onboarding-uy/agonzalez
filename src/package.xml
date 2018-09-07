@@ -13,5 +13,12 @@
         <members>Contact</members>
         <name>CustomObject</name>
     </types>
+    <types>
+        <members>Assignment__c-Assignment Layout</members>
+        <members>Assignment__c-Daily</members>
+        <members>Assignment__c-Habit</members>
+        <members>Assignment__c-TO-DO</members>
+        <name>Layout</name>
+    </types>
     <version>42.0</version>
 </Package>
