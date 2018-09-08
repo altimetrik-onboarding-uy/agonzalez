@@ -1,0 +1,31 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global">
+
+  <div class="c-container">
+    <lightning:layout multipleRows="true">
+      <lightning:layoutItem padding="around-small" size="12">        
+      </lightning:layoutItem>
+      <lightning:layoutItem padding="around-small" size="12">
+        <lightning:layout>
+          <lightning:layoutItem padding="around-small" size="4">
+            <fieldset class="myFieldset">
+              <legend class="myLegend">Habit</legend>
+              <c:tabHabit/>
+            </fieldset>
+          </lightning:layoutItem>
+          <lightning:layoutItem padding="around-small" size="4">
+            <fieldset class="myFieldset">
+              <legend class="myLegend">TO-DOs</legend>
+              <c:tabTodo/>
+            </fieldset>
+          </lightning:layoutItem>
+          <lightning:layoutItem padding="around-small" size="4">
+            <fieldset class="myFieldset">
+              <legend class="myLegend">Daily</legend>
+              <c:tabDaily/>
+            </fieldset>
+          </lightning:layoutItem>
+        </lightning:layout>
+      </lightning:layoutItem>
+    </lightning:layout>
+  </div>
+</aura:component>

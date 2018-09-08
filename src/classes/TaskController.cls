@@ -1,0 +1,68 @@
+public class TaskController {
+
+    @AuraEnabled
+    public static List<Assignment__c> getItems (String typeTask, String status) {
+        List<Assignment__c> listHabit = new List<Assignment__c>();
+        List<Assignment__c> listDone = new List<Assignment__c>();
+        List<Assignment__c> listNotDone = new List<Assignment__c>();
+       
+       for(Assignment__c task: [SELECT Id, Name, RecordTypeId, Status__c  FROM Assignment__c]){
+                String type = [SELECT Id,Name,SobjectType FROM RecordType WHERE SobjectType = 'Assignment__c' And Id =: task.RecordTypeId].Name; 
+                   System.debug(type);            
+                //Done 
+                if(type == typeTask && task.Status__c == 'Completed' ) {
+                    listDone.add(task);
+                }
+                //NotDone 
+                 if(type == typeTask && task.Status__c != 'Completed') {
+                    listNotDone.add(task);
+                } 
+                //All Habit              
+                  if(type == typeTask){
+                    
+                    listHabit.add(task);
+                } 
+             }
+
+        switch on status {
+   		 when 'Completed' {	
+       		 return listDone;
+                          }	
+         when 'NotCompleted' {	
+        	 return listNotDone;
+                             }   
+         when 'All' {	
+             listNotDone.addAll(listDone);
+        	 return listNotDone ;
+                             }  
+    	 when else           {
+            	  
+         	 return listHabit;
+                             }
+             }			
+    }
+    
+    @AuraEnabled
+    public static Assignment__c saveItem(Assignment__c item) {
+       
+        // Perform isUpdatable() checking first, then
+        upsert item;
+        return item;
+    }
+
+   @AuraEnabled
+        public static void deleteItem(String id) {
+        // Perform isUpdatable() checking first, then
+        Assignment__c item = [SELECT Id, Name 
+         FROM Assignment__c Where Id =: id];
+        delete item;        
+    }
+
+    @AuraEnabled 
+    public static Assignment__c getItem(string id){
+
+        Assignment__c item = [SELECT Id, Name 
+         FROM Assignment__c Where Id =: id];
+        return item;
+}
+}
