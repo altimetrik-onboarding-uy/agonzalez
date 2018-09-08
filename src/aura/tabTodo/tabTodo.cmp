@@ -1,13 +1,13 @@
 <aura:component>
-    <lightning:tabset variant="scoped">
+     <lightning:tabset variant="scoped">
         <lightning:tab label="Not Completed">
-            One Content !
+            <c:gridTodo status="NotCompleted" />
         </lightning:tab>
         <lightning:tab label="Completed">
-            Two Content !
+            <c:gridTodo status="Completed" />
         </lightning:tab>
         <lightning:tab label="All">
-            Three Content !
+            <c:gridTodo status="All" />
         </lightning:tab>
     </lightning:tabset>
 </aura:component>

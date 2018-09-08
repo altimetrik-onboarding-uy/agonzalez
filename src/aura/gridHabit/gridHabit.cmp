@@ -1,29 +1,31 @@
 <aura:component controller="TaskController">
     <!-- attributes -->
-    <aura:attribute name="tasks" type="Assignment__c[]" />  
+    <aura:attribute name="tasks" type="Assignment__c[]" />
 
     <!-- handlers-->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
     <!-- the container element determine the height of the datatable -->
-    <div class="slds-scrollable_y" style="height:100%;">
+    <div class="slds-scrollable_y">
         <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
             <tbody>
                 <!-- Use the Apex model and controller to fetch server side data -->
                 <aura:iteration items="{!v.tasks}" var="task">
                     <tr>
-                        <td>
-                            <lightning:buttonIcon iconName="utility:ban" variant="container" alternativeText="Settings" />
-                           
-                        </td>
-                        <td>
-                            <div class="slds-truncate" title="{!task.Name}">{!task.Name}</div>
-                        </td>
                         <!-- Use a Lightning Base Component To display an icon next to the label  -->
-                        <td class="slds-cell-edit" role="gridcell">
-                         <lightning:buttonIcon iconName="utility:new" variant="container" alternativeText="Settings" />
-                         
+                        <td class="slds-border_left" role="gridcell">
+                            <lightning:buttonIcon value="{!task.Id}" iconName="utility:new" alternativeText="Completed" onclick="{!c.completed}" />
+
                         </td>
+
+                        <td class="dataRow" role="gridcell">
+                            <div id="name" class="slds-truncate" title="{!task.Name}">{!task.Name}</div>
+                        </td>
+                        <td class="slds-border_right" role="gridcell">
+                            <lightning:buttonIcon value="{!task.Id}" iconName="utility:ban" alternativeText="Failed" onclick="{!c.failed}" />
+
+                        </td>
+
                     </tr>
                 </aura:iteration>
             </tbody>

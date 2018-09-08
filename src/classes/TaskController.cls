@@ -42,6 +42,24 @@ public class TaskController {
              }			
     }
     
+
+
+  @AuraEnabled
+    public static Assignment__c updateHabit(String id, String status, Boolean habit) {
+        Assignment__c item = [SELECT Id, Name, Condition__c,Status__c  
+         FROM Assignment__c Where Id =: id]; 
+        // Perform isUpdatable() checking first, then
+        if(habit){
+             item.Condition__c = status;
+        }else{
+            item.Status__c = status;
+        }
+       
+        upsert item;
+        return item;
+    }
+
+
     @AuraEnabled
     public static Assignment__c saveItem(Assignment__c item) {
        

@@ -1,5 +1,6 @@
 ({
-	myAction : function(component, event, helper) {
-		
-	}
+	//Read
+	doInit: function(component, event, helper) {		
+        helper.read(component, event);
+    },
 })
