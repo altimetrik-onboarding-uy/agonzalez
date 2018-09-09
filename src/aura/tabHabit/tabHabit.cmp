@@ -1,7 +1,0 @@
-<aura:component>
-    <lightning:tabset variant="scoped">
-        <lightning:tab label="All">
-            <c:gridHabit/>
-        </lightning:tab>
-    </lightning:tabset>
-</aura:component>

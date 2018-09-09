@@ -17,8 +17,10 @@
 	injectComponent: function (component, target) {
 
 		$A.createComponent(
-			"c:gridTodo", {
-				"status": target.get('v.id')
+			"c:Grid", {
+				"buttonHabit": component.get('v.habit'),
+				"status": target.get('v.id'),
+				"typeTask": component.get('v.typeTask'),
 				
 			},function (contentComponent, status, error) {
             if (status === "SUCCESS") {

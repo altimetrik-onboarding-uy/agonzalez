@@ -1,22 +1,22 @@
 <aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global">
 
-    <div class="slds-grid slds-gutters">
+    <div class="slds-grid slds-gutters" id="myContainer">
         <div class="slds-col slds-size_1-of-3">
             <fieldset class="myFieldset">
                 <legend class="myLegend">Habit</legend>
-                <c:tabHabit/>
+                <c:Tabset habit="true" typeTask="Habit"/>
               </fieldset>
         </div>
         <div class="slds-col slds-size_1-of-3">
             <fieldset class="myFieldset">
                 <legend class="myLegend">TO-DOs</legend>
-               <c:tabTodo/>
+               <c:Tabset habit="false" typeTask="TO-DO" />
               </fieldset>
         </div>
         <div class="slds-col slds-size_1-of-3">
             <fieldset class="myFieldset">
                 <legend class="myLegend">Daily</legend>
-                <c:tabDaily/>
+                <c:Tabset habit="false" typeTask="Daily" />
               </fieldset>
           </div>
       </div>  
