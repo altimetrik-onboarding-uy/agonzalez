@@ -8,7 +8,7 @@ public class TaskController {
        
        for(Assignment__c task: [SELECT Id, Name, RecordTypeId, Status__c  FROM Assignment__c]){
                 String type = [SELECT Id,Name,SobjectType FROM RecordType WHERE SobjectType = 'Assignment__c' And Id =: task.RecordTypeId].Name; 
-                   System.debug(type);            
+                             
                 //Done 
                 if(type == typeTask && task.Status__c == 'Completed' ) {
                     listDone.add(task);

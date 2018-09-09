@@ -7,19 +7,21 @@ trigger CalculatePoints on Assignment__c (after update) {
 	 Contact contObject =  [Select Id,Name,Total_Points__c from Contact WHERE Id =: a.Contact_Name__c Limit 1];
    
     switch on typeTask {
-   		 when 'TO_DO' {	
+   		 when 'TO-DO' {	
        		//TO-DO   
-       		 if(a.Status__c  == 'Completed' && a.LastModifiedDate < a.EndDate__c){         
+					 
+       		 if(a.Status__c  == 'Completed' && a.LastModifiedDate < a.EndDate__c){   						     
        		   contObject.Total_Points__c = contObject.Total_Points__c + a.Points__c;            
        		 } 
         
-        	if(a.Status__c  == 'Completed' && a.LastModifiedDate > a.EndDate__c){              
+        	if(a.Status__c  == 'Completed' && a.LastModifiedDate > a.EndDate__c){  					           
        		  contObject.Total_Points__c = contObject.Total_Points__c - a.Points__c;          
        		 }         
    
     }	
     	when 'Daily' {	
         	 //Daily  
+					  
         	 if(a.Status__c  == 'Completed' && a.LastModifiedDate.day() >= a.CreatedDate.addDays(1).day()){
                 contObject.Total_Points__c = contObject.Total_Points__c - a.Points__c; 
       	 	 } 
@@ -29,7 +31,8 @@ trigger CalculatePoints on Assignment__c (after update) {
        		 }         
        
     }    
-    	when else {		  
+    	when else {	
+				 	  
          	//Habit         	     
 			contObject.Total_Points__c = contObject.Total_Points__c + a.Points__c;
       }

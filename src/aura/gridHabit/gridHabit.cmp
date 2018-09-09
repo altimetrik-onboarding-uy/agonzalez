@@ -14,7 +14,7 @@
                     <tr>
                         <!-- Use a Lightning Base Component To display an icon next to the label  -->
                         <td class="slds-border_left" role="gridcell">
-                            <lightning:buttonIcon value="{!task.Id}" iconName="utility:new" alternativeText="Completed" onclick="{!c.completed}" />
+                            <lightning:buttonIcon value="{!task.Id}" iconName="utility:add" alternativeText="Completed" onclick="{!c.completed}" />
 
                         </td>
 
@@ -22,7 +22,7 @@
                             <div id="name" class="slds-truncate" title="{!task.Name}">{!task.Name}</div>
                         </td>
                         <td class="slds-border_right" role="gridcell">
-                            <lightning:buttonIcon value="{!task.Id}" iconName="utility:ban" alternativeText="Failed" onclick="{!c.failed}" />
+                            <lightning:buttonIcon value="{!task.Id}" iconName="utility:dash" alternativeText="Failed" onclick="{!c.failed}" />
 
                         </td>
 
