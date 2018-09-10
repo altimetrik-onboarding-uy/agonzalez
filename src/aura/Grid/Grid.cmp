@@ -14,6 +14,8 @@
     <!-- handlers-->
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
 
+ 
+
     <!-- the container element determine the height of the datatable -->
     <div class="slds-scrollable_y">
         <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
@@ -24,10 +26,12 @@
                         <!-- Use a Lightning Base Component To display an icon next to the label  -->
                         <td class="slds-border_left" role="gridcell">
                             <aura:if isTrue="{!v.buttonHabit}">
-                                <lightning:buttonIcon value="{!task.Id}" iconName="utility:add" alternativeText="Completed" onclick="{!c.completed}" />
+                                <lightning:buttonIcon value="{!task.Id}" iconName="utility:add" alternativeText="Completed"
+                                    onclick="{!c.completed}" />
 
                                 <aura:set attribute="else">
-                                    <lightning:buttonIcon value="{!task.Id}" iconName="utility:check" alternativeText="Completed" onclick="{!c.completed}" />
+                                    <lightning:buttonIcon value="{!task.Id}" iconName="utility:check" alternativeText="Completed"
+                                        onclick="{!c.completed}" />
 
                                 </aura:set>
                             </aura:if>
@@ -39,10 +43,12 @@
                         </td>
                         <td class="slds-border_right" role="gridcell">
                             <aura:if isTrue="{!v.buttonHabit}">
-                                <lightning:buttonIcon value="{!task.Id}" iconName="utility:dash" alternativeText="Failed" onclick="{!c.failedHabit}" />
+                                <lightning:buttonIcon value="{!task.Id}" iconName="utility:dash" alternativeText="Failed"
+                                    onclick="{!c.failedHabit}" />
 
                                 <aura:set attribute="else">
-                                    <lightning:buttonIcon value="{!task.Id}" iconName="utility:close" alternativeText="Failed" onclick="{!c.failed}" />
+                                    <lightning:buttonIcon value="{!task.Id}" iconName="utility:close" alternativeText="Failed"
+                                        onclick="{!c.failed}" />
 
                                 </aura:set>
                             </aura:if>

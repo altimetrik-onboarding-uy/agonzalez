@@ -38,6 +38,11 @@
 			var state = response.getState();
 			if (state === "SUCCESS") {
 				this.read(component, event);
+				if(status != 'In Progress'){
+					document.getElementById("notifi").style.display = 'block'; 
+				}
+				setInterval(function(){document.getElementById("notifi").style.display = 'none'},4000);
+				
 			}
 			else {
 				console.log("Failed with state: " + state);
@@ -46,5 +51,7 @@
 
 		// Send action off to be executed
 		$A.enqueueAction(action);
-	}
+	},
+
+	 
 })

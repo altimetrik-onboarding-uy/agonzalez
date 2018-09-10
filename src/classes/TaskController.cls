@@ -46,7 +46,7 @@ public class TaskController {
 
   @AuraEnabled
     public static Assignment__c updateHabit(String id, String status, Boolean habit) {
-        Assignment__c item = [SELECT Id, Name, Condition__c,Status__c  
+        Assignment__c item = [SELECT Id, Name, Condition__c,Status__c,Points__c  
          FROM Assignment__c Where Id =: id]; 
         // Perform isUpdatable() checking first, then
         if(habit){
@@ -59,28 +59,5 @@ public class TaskController {
         return item;
     }
 
-
-    @AuraEnabled
-    public static Assignment__c saveItem(Assignment__c item) {
-       
-        // Perform isUpdatable() checking first, then
-        upsert item;
-        return item;
-    }
-
-   @AuraEnabled
-        public static void deleteItem(String id) {
-        // Perform isUpdatable() checking first, then
-        Assignment__c item = [SELECT Id, Name 
-         FROM Assignment__c Where Id =: id];
-        delete item;        
-    }
-
-    @AuraEnabled 
-    public static Assignment__c getItem(string id){
-
-        Assignment__c item = [SELECT Id, Name 
-         FROM Assignment__c Where Id =: id];
-        return item;
-}
+ 
 }

@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>Task</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+        <pageOrSobjectType>Assignment__c</pageOrSobjectType>
+    </actionOverrides>
     <brand>
         <headerColor>#497DED</headerColor>
         <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
@@ -8,8 +17,10 @@
     <formFactors>Large</formFactors>
     <label>Habit Tracker</label>
     <navType>Standard</navType>
+    <setupExperience>all</setupExperience>
     <tabs>standard-Contact</tabs>
     <tabs>Assignment__c</tabs>
+    <tabs>Manage_Task</tabs>
     <uiType>Lightning</uiType>
     <utilityBar>Habit_Tracker_UtilityBar</utilityBar>
 </CustomApplication>

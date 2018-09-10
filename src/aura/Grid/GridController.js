@@ -18,5 +18,6 @@
 	 //Failed
 	 failedHabit: function(component, event, helper) {		
         helper.updatedStatus(component,event, 'Failed');
-    },
+    },  
+
 })
