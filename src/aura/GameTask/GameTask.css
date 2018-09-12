@@ -15,11 +15,5 @@
     padding-right: 2px;
     border: none;
     font-weight: bold;
+    background-color:  #FAFAFA;
 }
-
-.THIS#notifi {
-    display: none; 
-    position: fixed;
-    bottom: 0;
-    width: 100%;
- }

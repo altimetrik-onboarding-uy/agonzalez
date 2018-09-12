@@ -39,7 +39,7 @@
     <actionOverrides>
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
-        <content>Task</content>
+        <content>AssignmentPage</content>
         <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
@@ -76,6 +76,11 @@
                     <fullName>Failed</fullName>
                     <default>false</default>
                     <label>Failed</label>
+                </value>
+                <value>
+                    <fullName>New</fullName>
+                    <default>false</default>
+                    <label>New</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -285,6 +290,10 @@ CASE(Condition__c,
             </values>
             <values>
                 <fullName>Failed</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

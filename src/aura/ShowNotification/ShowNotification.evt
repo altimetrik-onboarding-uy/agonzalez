@@ -1,0 +1,4 @@
+<aura:event type="COMPONENT">
+        <aura:attribute name="before" type="Decimal"/>
+        <aura:attribute name="now" type="Decimal"  />  
+</aura:event>

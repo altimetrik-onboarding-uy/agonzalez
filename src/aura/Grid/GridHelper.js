@@ -20,7 +20,8 @@
 		});
 
 		// Send action off to be executed
-		$A.enqueueAction(action);
+		$A.enqueueAction(action);	      
+       
 	},
 
 	updatedStatus: function (component, event, status) {
@@ -37,21 +38,60 @@
 		action.setCallback(this, function (response) {
 			var state = response.getState();
 			if (state === "SUCCESS") {
+				component.set("v.before", response.getReturnValue());
 				this.read(component, event);
-				if(status != 'In Progress'){
-					document.getElementById("notifi").style.display = 'block'; 
-				}
-				setInterval(function(){document.getElementById("notifi").style.display = 'none'},4000);
-				
+
 			}
 			else {
 				console.log("Failed with state: " + state);
 			}
 		});
 
+
 		// Send action off to be executed
 		$A.enqueueAction(action);
+
+		this.showNotification(component, event, status);
 	},
 
-	 
+
+	showNotification: function (component, event, status) {
+		
+		var id = event.getSource().get("v.value");
+		var action = component.get("c.pointsNow");
+		action.setParams({
+			"id": id
+		});
+
+		action.setCallback(this, function (response) {
+			var state = response.getState();
+			if (state === "SUCCESS") {
+			
+				if (status != 'In Progress') {		
+					
+					$A.createComponent(
+						"c:Notification", {
+							"before": component.get("v.before"),
+							"now":  response.getReturnValue()
+
+						}, function (newcomponent) {
+							if (component.isValid()) {
+								var body = component.get("v.body");
+								body.push(newcomponent);
+								component.set("v.body", body);
+							}
+						});
+				}
+			}
+			else {
+				console.log("Failed with state: " + state);
+			}
+		});
+		// Send action off to be executed	
+		$A.enqueueAction(action);
+
+
+
+	},
+
 })

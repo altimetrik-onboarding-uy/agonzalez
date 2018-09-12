@@ -1,0 +1,22 @@
+.THIS#notifi {
+   
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding-right: 3%;
+ }
+
+ 
+.THIS #Before{
+    color:rgb(96, 206, 68);
+   
+   
+}
+
+.THIS #Now{
+    color:rgb(231, 20, 20);
+}
+
+.THIS #title{
+    font-weight: bold;
+}

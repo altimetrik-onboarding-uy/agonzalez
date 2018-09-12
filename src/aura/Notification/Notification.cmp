@@ -1,0 +1,42 @@
+<aura:component>
+
+    <!-- Attribute for the total points task -->
+    <aura:attribute name="before" type="Decimal" />
+    <aura:attribute name="now" type="Decimal" />
+
+    <!-- Notificacion-->
+    <div class="page-footer page-section" id="notifi">
+        <div class="slds-grid slds-grid_align-spread">
+            <p class="slds-col"> </p>
+            <div aria-live="assertive" aria-atomic="true" class="slds-assistive-text">
+                event notification: Your points are changed!
+            </div>
+            <section class="slds-notification" role="dialog" aria-labelledby="noti52" aria-describedby="dialog-body-id-2">
+                <div class="slds-notification__body" id="dialog-body-id-2">
+                    <a class="slds-notification__target slds-media" href="javascript:void(0);">
+                        <lightning:icon class="slds-icon_container slds-icon-standard-event slds-media__figure"
+                            iconName="standard:contact" alternativeText="Task" />
+                        <div class="slds-media__body">
+                            <h2 class="slds-text-heading--small slds-m-bottom--xx-small" id="title">
+                                <span class="slds-assistive-text">event notification:</span>Your points are changed!</h2>
+                            <div class="slds-grid slds-gutters">
+                                <div class="slds-col slds-size_1-of-2" id="Before">Before:
+                                    {!v.before}
+
+                                </div>
+                                <div class="slds-col slds-size_1-of-2" id="Now">Now:
+                                    {!v.now}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <lightning:buttonIcon class="slds-button slds-button_icon slds-button--icon-container slds-notification__close"
+                        iconName="utility:close" size="small" onclick="{! c.closeNotify }" variant="bare"
+                        alternativeText="Close" />
+                </div>
+            </section>
+        </div>
+    </div>
+
+
+</aura:component>

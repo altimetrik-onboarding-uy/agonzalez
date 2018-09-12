@@ -8,7 +8,7 @@ List<Contact> toUpdateContact = new List<Contact>();
              String type = [SELECT Id,Name,SobjectType FROM RecordType WHERE SobjectType = 'Assignment__c' And Id =: task.RecordTypeId].Name; 
               
             if(type == 'Habit'){
-             task.Condition__c = '';
+             task.Condition__c = 'New';
              }
            
             if(type == 'Daily'){
@@ -23,6 +23,6 @@ List<Contact> toUpdateContact = new List<Contact>();
         }
         update toUpdateContact;
         update toUpdate;       
-    }   
+    }       
 
 }

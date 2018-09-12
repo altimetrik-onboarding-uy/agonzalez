@@ -24,30 +24,28 @@ public class TaskController {
                 } 
              }
 
-        switch on status {
-   		 when 'Completed' {	
-       		 return listDone;
-                          }	
-         when 'NotCompleted' {	
-        	 return listNotDone;
-                             }   
-         when 'All' {	
-             listNotDone.addAll(listDone);
-        	 return listNotDone ;
-                             }  
-    	 when else           {
-            	  
-         	 return listHabit;
-                             }
-             }			
+             if(status == 'Completed'){
+               return listDone;
+             }
+             if(status == 'NotCompleted'){
+               return listNotDone;
+             }
+             if(status == 'All'){
+              listNotDone.addAll(listDone);
+        	  return listNotDone ;
+             }
+           return listHabit;       		
     }
     
 
 
   @AuraEnabled
-    public static Assignment__c updateHabit(String id, String status, Boolean habit) {
-        Assignment__c item = [SELECT Id, Name, Condition__c,Status__c,Points__c  
+    public static Decimal updateHabit(String id, String status, Boolean habit) {
+       
+        Assignment__c item = [SELECT Id, Name, Condition__c,Status__c,Points__c,Contact_Name__c  
          FROM Assignment__c Where Id =: id]; 
+          Decimal totalPoint =  [Select Id,Name,Total_Points__c from Contact WHERE Id =: item.Contact_Name__c Limit 1].Total_Points__c;
+      
         // Perform isUpdatable() checking first, then
         if(habit){
              item.Condition__c = status;
@@ -56,8 +54,17 @@ public class TaskController {
         }
        
         upsert item;
-        return item;
+        return totalPoint;
     }
 
+  @AuraEnabled
+    public static Decimal pointsNow(String id) {
+        Assignment__c item = [SELECT Id, Name, Condition__c,Status__c,Points__c,Contact_Name__c  
+         FROM Assignment__c Where Id =: id]; 
+
+        Decimal totalPoint =  [Select Id,Name,Total_Points__c from Contact WHERE Id =: item.Contact_Name__c Limit 1].Total_Points__c;
+            
+        return totalPoint;
+    }
  
 }
