@@ -4,27 +4,31 @@
     <aura:attribute name="before" type="Decimal" />
     <aura:attribute name="now" type="Decimal" />
 
+    <!-- handlers-->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler event="c:ShowNotification" action="{!c.ShowNotification}"/>
+
     <!-- Notificacion-->
-    <div class="page-footer page-section" id="notifi">
+    <div class="page-footer page-section show" aura:id="notify">
         <div class="slds-grid slds-grid_align-spread">
             <p class="slds-col"> </p>
             <div aria-live="assertive" aria-atomic="true" class="slds-assistive-text">
                 event notification: Your points are changed!
             </div>
             <section class="slds-notification" role="dialog" aria-labelledby="noti52" aria-describedby="dialog-body-id-2">
-                <div class="slds-notification__body" id="dialog-body-id-2">
+                <div class="slds-notification__body">
                     <a class="slds-notification__target slds-media" href="javascript:void(0);">
                         <lightning:icon class="slds-icon_container slds-icon-standard-event slds-media__figure"
                             iconName="standard:contact" alternativeText="Task" />
                         <div class="slds-media__body">
-                            <h2 class="slds-text-heading--small slds-m-bottom--xx-small" id="title">
+                            <h2 class="slds-text-heading--small slds-m-bottom--xx-small title">
                                 <span class="slds-assistive-text">event notification:</span>Your points are changed!</h2>
                             <div class="slds-grid slds-gutters">
-                                <div class="slds-col slds-size_1-of-2" id="Before">Before:
+                                <div class="slds-col slds-size_1-of-2 Before">Before:
                                     {!v.before}
 
                                 </div>
-                                <div class="slds-col slds-size_1-of-2" id="Now">Now:
+                                <div class="slds-col slds-size_1-of-2 Now">Now:
                                     {!v.now}
                                 </div>
                             </div>

@@ -1,6 +1,6 @@
 <aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global">
 
-    <div class="slds-grid slds-gutters" id="myContainer">
+    <div class="slds-grid slds-gutters">
         <div class="slds-col slds-size_1-of-3">
             <fieldset class="myFieldset">
                 <legend class="myLegend">Habit</legend>
@@ -20,5 +20,7 @@
             </fieldset>
         </div>
     </div>
+
+    <c:Notification/>
 
 </aura:component>
