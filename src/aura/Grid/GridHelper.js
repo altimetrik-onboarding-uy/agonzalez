@@ -1,12 +1,15 @@
 ({
-	read: function (component, newItem) {
+	read: function (component, event) {
 		var status = component.get("v.status");
 		var typeTask = component.get("v.typeTask");
+		var idContact = component.get("v.idContact");
 		// Create the action
+		
 		var action = component.get("c.getItems");
 		action.setParams({
+			"id": idContact,
 			"typeTask": typeTask,
-			"status": status
+			"status": status,			
 		});
 		// Add callback behavior for when response is received
 		action.setCallback(this, function (response) {

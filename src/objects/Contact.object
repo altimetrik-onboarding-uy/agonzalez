@@ -313,4 +313,10 @@
         <searchResultsAdditionalFields>CORE.USERS.ALIAS</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>EmailRequired</fullName>
+        <active>true</active>
+        <errorConditionFormula>ISBLANK(Email)</errorConditionFormula>
+        <errorMessage>The email is required</errorMessage>
+    </validationRules>
 </CustomObject>

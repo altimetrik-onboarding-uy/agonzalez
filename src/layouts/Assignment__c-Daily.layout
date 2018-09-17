@@ -16,6 +16,10 @@
                 <field>Description__c</field>
             </layoutItems>
             <layoutItems>
+                <behavior>Edit</behavior>
+                <field>DailyDate__c</field>
+            </layoutItems>
+            <layoutItems>
                 <behavior>Readonly</behavior>
                 <field>Points__c</field>
             </layoutItems>

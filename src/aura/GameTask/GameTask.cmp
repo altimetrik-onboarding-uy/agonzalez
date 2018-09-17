@@ -1,16 +1,26 @@
 <aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global">
 
+    <!-- Attribute for show task for a Contact -->
+    <aura:attribute Name="selItem" type="Contact" access="public" />
+    
+
+    <div class="page-footer page-section myContac" aura:id="notify">
+        <c:Buscador objectName="Contact" field_API_text="Name" field_API_val="Id" limit="200" field_API_search="Name"
+            lookupIcon="standard:contact" selItem="{!v.selItem}" placeholder="Select a Contact" />
+    </div>
+
+    <br />
     <div class="slds-grid slds-gutters">
         <div class="slds-col slds-size_1-of-3">
             <fieldset class="myFieldset">
                 <legend class="myLegend">Habit</legend>
-                <c:Tabset habit="true" typeTask="Habit" />
+                <c:Tabset habit="true" typeTask="Habit"/>
             </fieldset>
         </div>
         <div class="slds-col slds-size_1-of-3">
             <fieldset class="myFieldset">
                 <legend class="myLegend">TO-DOs</legend>
-                <c:Tabset habit="false" typeTask="TO-DO" />
+                <c:Tabset habit="false" typeTask="TO-DO"/>
             </fieldset>
         </div>
         <div class="slds-col slds-size_1-of-3">
@@ -21,6 +31,6 @@
         </div>
     </div>
 
-    <c:Notification/>
+    <c:Notification />
 
 </aura:component>

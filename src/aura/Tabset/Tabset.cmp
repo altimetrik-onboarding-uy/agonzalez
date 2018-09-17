@@ -5,6 +5,12 @@
     <!-- Attribute for the status task -->
     <aura:attribute name="typeTask" type="String" />
 
+    <!-- Attribute for show task for a Contact -->
+    <aura:attribute name="idContact" type="String" />   
+    
+    <!-- Event to reload the task  -->
+    <aura:handler event="c:ShowTask" action="{!c.reloadGrid}"/>
+
     <lightning:tabset variant="scoped">
         <aura:if isTrue="{!v.habit}">
             <lightning:tab label="All" onactive="{! c.handleActive }" id="All">

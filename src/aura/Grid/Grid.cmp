@@ -1,4 +1,4 @@
-<aura:component controller="TaskController">
+<aura:component controller="TaskController" access="global">
     <!-- attributes -->
     <aura:attribute name="tasks" type="Assignment__c[]" />
 
@@ -16,9 +16,15 @@
     <!-- Attribute for show points before -->
     <aura:attribute name="before" type="Decimal" />
 
+    <!-- Attribute for show task for a Contact -->
+    <aura:attribute name="idContact" type="String" />
 
-    <!-- handlers-->
-    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+     <!-- handlers-->
+     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!-- Event to reload the task  -->
+    <aura:handler event="c:ShowTask" action="{!c.reloadGrid}"/>
+
     <aura:registerEvent name="ShowNotification" type="c:ShowNotification" />
 
 

@@ -1,28 +1,57 @@
 global class StatusScheduler implements  Schedulable {
 List<Assignment__c> toUpdate = new List<Assignment__c>();
 List<Contact> toUpdateContact = new List<Contact>();
+    
     global void  execute(SchedulableContext sc){
+         String body = 'Task(s) not Completed:' + '<br/>';
+         Boolean hasTaskIncompleted = false;
        
-        for(Assignment__c task: [SELECT Id, Name,Contact_Name__c, Points__c, Condition__c,Status__c, RecordTypeId 
-                                 FROM Assignment__c]){
-             String type = [SELECT Id,Name,SobjectType FROM RecordType WHERE SobjectType = 'Assignment__c' And Id =: task.RecordTypeId].Name; 
+        for(Contact cont: [SELECT Id, Name,Total_Points__c,Email FROM Contact]){
+           
+           for(Assignment__c task: [SELECT Id, Name,Contact_Name__c, Points__c, Condition__c,Status__c, RecordTypeId, DailyDate__c 
+                                   FROM Assignment__c Where Contact_Name__c =: cont.Id ]){
+                                    
+            String type = [SELECT Id,Name,SobjectType FROM RecordType WHERE SobjectType = 'Assignment__c' And Id =: task.RecordTypeId].Name; 
               
             if(type == 'Habit'){
-             task.Condition__c = 'New';
+                  //Format the Condition 
+             	task.Condition__c = 'New';
              }
-           
+         
             if(type == 'Daily'){
+                   //I decrease points
                 if(task.Status__c != 'Completed'){
-                    Contact contObject =  [Select Id,Name,Total_Points__c from Contact WHERE Id =: task.Contact_Name__c Limit 1];
-                    contObject.Total_Points__c = contObject.Total_Points__c - task.Points__c; 
-                    toUpdateContact.add(contObject);
+                    
+                    hasTaskIncompleted = true;
+                    body += 'The task: ' + task.Name + ' no was completed lost ' + task.Points__c + ' points' + '<br/>';
+                    cont.Total_Points__c = cont.Total_Points__c - task.Points__c;                    
                 }
-            task.Status__c = 'New';
-        }
-            toUpdate.add(task);
-        }
-        update toUpdateContact;
-        update toUpdate;       
+                   //Format the Status and the date
+            		task.Status__c = 'New';
+           			task.DailyDate__c = Date.today();   
+           		}
+            toUpdate.add(task);           
+          }
+            
+                            
+                   if(hasTaskIncompleted){
+                       if (cont.Email != null) {      
+                      	 Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
+              			 List<String> sendTo = new List<String>();
+               			 sendTo.add(cont.Email);
+               			 email.setToAddresses(sendTo);
+              			 email.setSubject('Bad News');              
+                		 email.setHtmlBody(body);            
+              			 Messaging.sendEmail(new Messaging.SingleEmailMessage[] { email });
+                   } 
+                        toUpdateContact.add(cont);
+            }
+            
+            hasTaskIncompleted = false;
+      }
+        
+           update toUpdateContact;
+           update toUpdate;    
     }       
 
 }

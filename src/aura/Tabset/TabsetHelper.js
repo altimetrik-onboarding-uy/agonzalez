@@ -14,16 +14,15 @@
 
 		}
 	},
-	injectComponent: function (component, target, buttonCheck, buttonFail ) {
-
+	injectComponent: function (component, target, buttonCheck, buttonFail) {
 		$A.createComponent(
 			"c:Grid", {
 				"buttonHabit": component.get('v.habit'),
 				"status": target.get('v.id'),
 				"typeTask": component.get('v.typeTask'),
 				"buttonCheck": buttonCheck,
-				"buttonFail": buttonFail
-
+				"buttonFail": buttonFail,
+				"idContact": component.get('v.idContact')
 			}, function (contentComponent, status, error) {
 				if (status === "SUCCESS") {
 					target.set('v.body', contentComponent);
