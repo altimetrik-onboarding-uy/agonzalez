@@ -31,20 +31,20 @@ public class TestTaskController {
        Integer items = TaskController.getItems(test.Id, types, 'All').size(); 
        System.assertEquals(5, items);                                        
     }
-    
+   
     @isTest static void updateHabit() { 
        String types = 'Habit';      
        Contact cont = TestDataFactory.createAssigment(1, types, false, 'New'); 
        String idTask = [Select id from Assignment__c where Contact_Name__c =: cont.Id ].Id;  
-       Decimal items = TaskController.updateHabit(idTask, 'Completed', true); 
+       Decimal items = TaskController.updateStatus(idTask, 'Completed', true); 
        System.assertEquals(1, [select count() from Assignment__c where Condition__c =  'Completed' ]);                                        
     }
-    
+   
     @isTest static void updateDaily() { 
        String types = 'Daily';      
        Contact cont = TestDataFactory.createAssigment(1, types, false, 'New'); 
        String idTask = [Select id from Assignment__c where Contact_Name__c =: cont.Id ].Id;  
-       Decimal items = TaskController.updateHabit(idTask, 'Completed', false); 
+       Decimal items = TaskController.updateStatus(idTask, 'Completed', false); 
        System.assertEquals(1, [select count() from Assignment__c where Status__c =  'Completed' ]);                                        
     }
     
@@ -52,7 +52,7 @@ public class TestTaskController {
        String types = 'Habit';      
        Contact cont = TestDataFactory.createAssigment(1, types, false, 'New');
        String idTask = [Select id from Assignment__c where Contact_Name__c =: cont.Id ].Id; 
-       TestDataFactory.UpdateStatus(cont, types);   
+       Decimal items = TaskController.updateStatus(idTask, 'Completed', true);  
        Decimal ite = TaskController.pointsNow(idTask); 
        System.assertEquals(1, [select Total_Points__c from Contact Limit 1].Total_Points__c);                                        
     }
@@ -61,11 +61,10 @@ public class TestTaskController {
 	   static void searchDBTest() {        
        String jsonResult = TaskController.searchDB('Contact','FirstName','Id',200,'FirstName','a');        
        TaskController.ResultWrapper emp = new TaskController.ResultWrapper('Contact', 'Name', '34');
-       System.assert(jsonResult != null);
-                                           
+       System.assert(jsonResult != null);                                           
     }
 
- 
+
 
 
 }

@@ -42,19 +42,21 @@ public class TestDataFactory {
     }
   
 
-   public static void UpdateStatus(Contact cont, String types){
+   public static void UpdateStatus(List<Contact> listContact, String types){
        List<Assignment__c> toUpdate = new List<Assignment__c>(); 
-          
-       for (Assignment__c a : [select Condition__c from Assignment__c where Contact_Name__c =: cont.Id ]) {	
-            
-           if(types == 'Habit'){
-           a.Condition__c = 'Completed';
-           toUpdate.add(a);
-           } else{
-           a.Status__c = 'Completed';
-           toUpdate.add(a);  
-           }          
-       }
+      
+       for (Contact cont :listContact){
+           
+             for (Assignment__c task : [select Condition__c from Assignment__c where Contact_Name__c =: cont.Id ]) {          
+           			
+                 if(types == 'Habit'){
+          			 task.Condition__c = 'Completed';          			
+           		} else{
+          			 task.Status__c = 'Completed'; 
+                }
+                 toUpdate.add(task);
+             }
+       } 
         update toUpdate;    
     }
     
@@ -74,6 +76,7 @@ public class TestDataFactory {
             // For each account just inserted, add opportunities
             for (Integer i=0; i < paramFirst; i++) {
              String record = Schema.SObjectType.Assignment__c.getRecordTypeInfosByName().get(types).getRecordTypeId();
+                 
              Date nowDate = Date.today();
              if(fecha){
                  nowDate = Date.today().addDays(-5);
@@ -91,7 +94,7 @@ public class TestDataFactory {
                task.Condition__c= status;
               }
              
-             if(types == 'Daily'){
+             if(types == 'Daily'){               
                task.DailyDate__c= nowDate;
               }  
 			opps.add(task);            
@@ -103,7 +106,7 @@ public class TestDataFactory {
              System.Debug(ex);
         }
        
-        
+         
         return accts;
     }
 

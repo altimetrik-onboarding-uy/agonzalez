@@ -10,9 +10,7 @@ public with sharing class TaskController {
             text = texto;
             val = value;
         }
-    }
-    
-    
+    }   
 
     @AuraEnabled
     public static List<Assignment__c> getItems (String id, String typeTask, String status) {
@@ -48,31 +46,27 @@ public with sharing class TaskController {
         	  return listNotDone ;
              }
            return listHabit;       		
-    }
-    
+    }   
 
-
-  @AuraEnabled
-    public static Decimal updateHabit(String id, String status, Boolean habit) {
+ 	@AuraEnabled
+    public static Decimal updateStatus(String id, String status, Boolean habit) {
       
         Assignment__c item = [SELECT Id, Name, Condition__c,Status__c,Points__c,Contact_Name__c  
-         FROM Assignment__c Where Id =: id];
-        
+         FROM Assignment__c Where Id =: id];        
           
-          Decimal totalPoint =  [Select Id,Name,Total_Points__c from Contact WHERE Id =: item.Contact_Name__c Limit 1].Total_Points__c;
+        Decimal totalPointBeforeUpdate =  [Select Id,Name,Total_Points__c from Contact WHERE Id =: item.Contact_Name__c Limit 1].Total_Points__c;
         
         // Perform isUpdatable() checking first, then
         if(habit){
              item.Condition__c = status;
         }else{
             item.Status__c = status;
-        }
-       
+        }       
         upsert item;
-        return totalPoint;
+        return totalPointBeforeUpdate;
     }
 
-  @AuraEnabled
+    @AuraEnabled
     public static Decimal pointsNow(String id) {
         Assignment__c item = [SELECT Id, Name, Condition__c,Status__c,Points__c,Contact_Name__c  
          FROM Assignment__c Where Id =: id]; 

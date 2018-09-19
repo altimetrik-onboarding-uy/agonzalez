@@ -20,7 +20,7 @@
         } 
     }, 
     
-    serverCall : function(component, event, helper) {  
+    SearchText : function(component, event, helper) {  
         var target = event.target;  
         var searchText = target.value; 
         var last_SearchText = component.get("v.last_SearchText");

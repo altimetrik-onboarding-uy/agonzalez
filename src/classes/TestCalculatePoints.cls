@@ -4,67 +4,86 @@ public class TestCalculatePoints {
      static String status = 'New';  
     
       @isTest static void TestAssigmentHabit() {
-        String habit = 'Habit';       
-        Contact contactTest = TestDataFactory.createAssigment(2, habit, false, status); 
+        String habit = 'Habit';   
+        Decimal aux = 0; 
+        list<Contact> contactTest = TestDataFactory.createContact(2, 3, habit, false, status); 
        
         Test.startTest();
         TestDataFactory.UpdateStatus(contactTest, habit);
         Test.stopTest();
        
+          for(Contact cont : [Select Total_Points__c from Contact where FirstName like '%Contact%']){
+              aux = aux + cont.Total_Points__c;
+          }
         // after the testing stops, assert records were updated properly
-         System.assertEquals(2, [select Total_Points__c from Contact where Id =: contactTest.Id Limit 1].Total_Points__c);
+         System.assertEquals(2, aux);
         
     }
     
       @isTest static void TestAssigmentTodoCompleted() {
         String todo = 'TO-DO';    
-        Contact contactTest = TestDataFactory.createAssigment(2, todo, false,status); 
+        Decimal aux = 0; 
+        list<Contact> contactTest = TestDataFactory.createContact(2, 3, todo, false, status); 
        
         Test.startTest();
         TestDataFactory.UpdateStatus(contactTest, todo);
         Test.stopTest();
        
+          for(Contact cont : [Select Total_Points__c from Contact where FirstName like '%Contact%']){
+              aux = aux + cont.Total_Points__c;
+          }
         // after the testing stops, assert records were updated properly
-         System.assertEquals(4, [select Total_Points__c from Contact where Id =: contactTest.Id Limit 1].Total_Points__c);
-        
+         System.assertEquals(4, aux);
     }
-    
+     
       @isTest static void TestAssigmentTodoFailed() {
-        String todo = 'TO-DO';     
-        Contact contactTest = TestDataFactory.createAssigment(2, todo,true,status); 
+        String todo = 'TO-DO';    
+        Decimal aux = 0; 
+        list<Contact> contactTest = TestDataFactory.createContact(2, 3, todo, true, status); 
        
         Test.startTest();
         TestDataFactory.UpdateStatus(contactTest, todo);
         Test.stopTest();
        
+          for(Contact cont : [Select Total_Points__c from Contact where FirstName like '%Contact%']){
+              aux = aux + cont.Total_Points__c;
+          }
         // after the testing stops, assert records were updated properly
-         System.assertEquals(-4, [select Total_Points__c from Contact where Id =: contactTest.Id Limit 1].Total_Points__c);
+         System.assertEquals(-4, aux);
         
     }
     
       @isTest static void TestAssigmentDailyCompleted() {
         String todo = 'Daily';
-        Contact contactTest = TestDataFactory.createAssigment(2, todo, false,status); 
+        Decimal aux = 0; 
+        list<Contact> contactTest = TestDataFactory.createContact(2, 3, todo, false, status); 
        
         Test.startTest();
         TestDataFactory.UpdateStatus(contactTest, todo);
         Test.stopTest();
        
+          for(Contact cont : [Select Total_Points__c from Contact where FirstName like '%Contact%']){
+              aux = aux + cont.Total_Points__c;
+          }
         // after the testing stops, assert records were updated properly
-         System.assertEquals(2, [select Total_Points__c from Contact where Id =: contactTest.Id Limit 1].Total_Points__c);
+         System.assertEquals(2, aux);
         
     }
     
       @isTest static void TestAssigmentDailyFailed() {
         String todo = 'Daily';
-        Contact contactTest = TestDataFactory.createAssigment(2, todo, true,status ); 
+        Decimal aux = 0; 
+        list<Contact> contactTest = TestDataFactory.createContact(2, 3, todo, true, status); 
        
         Test.startTest();
         TestDataFactory.UpdateStatus(contactTest, todo);
         Test.stopTest();
        
+          for(Contact cont : [Select Total_Points__c from Contact where FirstName like '%Contact%']){
+              aux = aux + cont.Total_Points__c;
+          }
         // after the testing stops, assert records were updated properly
-         System.assertEquals(-2, [select Total_Points__c from Contact where Id =: contactTest.Id Limit 1].Total_Points__c);
-        
+         System.assertEquals(-2, aux);        
     }
+
 }

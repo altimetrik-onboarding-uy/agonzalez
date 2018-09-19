@@ -5,7 +5,7 @@
     
 
     <div class="page-footer page-section myContac" aura:id="notify">
-        <c:Buscador objectName="Contact" field_API_text="Name" field_API_val="Id" limit="200" field_API_search="Name"
+        <c:Lookup objectName="Contact" field_API_text="Name" field_API_val="Id" limit="200" field_API_search="Name"
             lookupIcon="standard:contact" selItem="{!v.selItem}" placeholder="Select a Contact" />
     </div>
 

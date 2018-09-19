@@ -36,7 +36,7 @@
 
                 <!-- Use the Apex model and controller to fetch server side data -->
                 <aura:iteration items="{!v.tasks}" var="task">
-                    <tr>
+                    <tr class = "{!task.Id}">
                         <!-- Use a Lightning Base Component To display an icon next to the label  -->
                         <td class="slds-border_left" role="gridcell">
                             <aura:if isTrue="{!v.buttonHabit == true}">
@@ -51,7 +51,7 @@
                         </td>
 
                         <td class="dataRow" role="gridcell">
-                            <div id="name" class="slds-truncate" title="{!task.Name}">{!task.Name}</div>
+                            <div class="slds-truncate" title="{!task.Name}">{!task.Name}</div>
                         </td>
                         <td class="slds-border_right" role="gridcell">
                             <aura:if isTrue="{!v.buttonHabit == true}">

@@ -4,12 +4,12 @@
 		var typeTask = component.get("v.typeTask");
 		var idContact = component.get("v.idContact");
 		// Create the action
-		
+
 		var action = component.get("c.getItems");
 		action.setParams({
 			"id": idContact,
 			"typeTask": typeTask,
-			"status": status,			
+			"status": status,
 		});
 		// Add callback behavior for when response is received
 		action.setCallback(this, function (response) {
@@ -31,7 +31,7 @@
 		// Update
 		var habit = component.get("v.buttonHabit");
 		var id = event.getSource().get("v.value");
-		var action = component.get("c.updateHabit");
+		var action = component.get("c.updateStatus");
 		action.setParams({
 			"id": id,
 			"status": status,
@@ -42,7 +42,11 @@
 			var state = response.getState();
 			if (state === "SUCCESS") {
 				component.set("v.before", response.getReturnValue());
-				this.read(component, event);
+				
+				if (!habit) {
+					document.getElementsByClassName(id)[0].style.display = 'none';
+				}
+
 				this.showNotification(component, event, status);
 			}
 			else {
@@ -76,7 +80,7 @@
 						"before": component.get("v.before"),
 						"now": response.getReturnValue()
 					});
-					event.fire();					
+					event.fire();
 				}
 			}
 			else {
