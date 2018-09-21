@@ -27,6 +27,7 @@
     </types>
     <types>
         <members>AssignmentPage</members>
+        <members>Habit_Tracker_UtilityBar</members>
         <members>Manage_Task</members>
         <name>FlexiPage</name>
     </types>
