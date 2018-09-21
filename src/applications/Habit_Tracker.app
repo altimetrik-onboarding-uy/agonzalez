@@ -22,5 +22,4 @@
     <tabs>Assignment__c</tabs>
     <tabs>Manage_Task</tabs>
     <uiType>Lightning</uiType>
-    <utilityBar>Habit_Tracker_UtilityBar</utilityBar>
 </CustomApplication>
