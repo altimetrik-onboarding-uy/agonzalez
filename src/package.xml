@@ -26,6 +26,11 @@
         <name>CustomTab</name>
     </types>
     <types>
+        <members>AssignmentPage</members>
+        <members>Manage_Task</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
         <members>Assignment__c-Assignment Layout</members>
         <members>Assignment__c-Daily</members>
         <members>Assignment__c-Habit</members>
