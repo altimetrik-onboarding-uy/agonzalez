@@ -1,4 +1,4 @@
-global class StatusScheduler implements Database.Batchable<sObject>, Schedulable{
+global class StatusScheduler implements Database.Batchable<sObject>, Schedulable{   
     
     // instance member to retain state across transactions
     global Database.QueryLocator start(Database.BatchableContext bc) {
@@ -8,11 +8,11 @@ global class StatusScheduler implements Database.Batchable<sObject>, Schedulable
     }
     global void execute(Database.BatchableContext bc, List<Contact> scope){       
      	List<Assignment__c> toUpdate = new List<Assignment__c>();
-        List<Contact> toUpdateContact = new List<Contact>();
-    
-         String body = 'Task(s) not Completed:' + '<br/>';
-         Boolean hasTaskIncompleted = false;
-            
+        List<Contact> toUpdateContact = new List<Contact>();  
+        Boolean hasTaskIncompleted = false;
+        string body = 'Task(s) not Completed:' + '<br/>';
+        String [] sendTo = new String[]{};
+        
            for(Contact cont: scope){
            			
             for(Assignment__c task: [SELECT Id, Name,Contact_Name__c, Points__c, Condition__c,Status__c, RecordTypeId, DailyDate__c 
@@ -40,25 +40,25 @@ global class StatusScheduler implements Database.Batchable<sObject>, Schedulable
             toUpdate.add(task);           
           }
               if(hasTaskIncompleted){                 
-                  if (cont.Email != null) {                       
-                  	 Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
-            		 List<String> sendTo = new List<String>();
-            		 sendTo.add(cont.Email);
-               		 email.setToAddresses(sendTo);
-              		 email.setSubject('Bad News');              
-                	 email.setHtmlBody(body);            
-              		  Messaging.sendEmail(new Messaging.SingleEmailMessage[] { email });
+                  if (cont.Email != null) {  
+                       sendTo.add(cont.Email);  
+                        Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();          
+        			    email.setToAddresses(sendTo);
+        			    email.setSubject('Bad News');  
+         				email.setHtmlBody(body); 
+         				Messaging.sendEmail(new Messaging.SingleEmailMessage[] { email });
                    } 
                   toUpdateContact.add(cont);
             }
             hasTaskIncompleted = false;
       }
+        
            update toUpdateContact;
            update toUpdate; 
     }
         
-     global void finish(Database.BatchableContext bc){
-         
+     global void finish(Database.BatchableContext bc){    
+       
     }
     
       global void execute(SchedulableContext sc) {
