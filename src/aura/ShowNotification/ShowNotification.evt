@@ -1,0 +1,4 @@
+<aura:event access="global" type="APPLICATION" description="Mostrar notification">
+        <aura:attribute name="before" type="Decimal"/>
+        <aura:attribute name="now" type="Decimal"  />  
+</aura:event>

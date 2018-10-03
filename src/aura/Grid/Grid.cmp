@@ -1,0 +1,73 @@
+<aura:component controller="TaskController" access="global">
+    <!-- attributes -->
+    <aura:attribute name="tasks" type="Assignment__c[]" />
+
+    <!-- Attribute for change button -->
+    <aura:attribute name="buttonHabit" type="Boolean" default="true" />
+    <aura:attribute name="buttonCheck" type="Boolean" default="true" />
+    <aura:attribute name="buttonFail" type="Boolean" default="true" />
+
+    <!-- Attribute for the status task -->
+    <aura:attribute name="status" type="String" />
+
+    <!-- Attribute for the status task -->
+    <aura:attribute name="typeTask" type="String" />
+
+    <!-- Attribute for show points before -->
+    <aura:attribute name="before" type="Decimal" />
+
+    <!-- Attribute for show task for a Contact -->
+    <aura:attribute name="idContact" type="String" />
+
+     <!-- handlers-->
+     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+    <!-- Event to reload the task  -->
+    <aura:handler event="c:ShowTask" action="{!c.reloadGrid}"/>
+
+    <aura:registerEvent name="ShowNotification" type="c:ShowNotification" />
+
+
+
+    <!-- the container element determine the height of the datatable -->
+    <div class="slds-scrollable_y">
+        <table class="slds-table slds-table_bordered slds-table_striped slds-table_cell-buffer slds-table_fixed-layout">
+            <tbody>
+
+                <!-- Use the Apex model and controller to fetch server side data -->
+                <aura:iteration items="{!v.tasks}" var="task">
+                    <tr class = "{!task.Id}">
+                        <!-- Use a Lightning Base Component To display an icon next to the label  -->
+                        <td class="slds-border_left" role="gridcell">
+                            <aura:if isTrue="{!v.buttonHabit == true}">
+                                <lightning:buttonIcon class="done" value="{!task.Id}" iconName="utility:add"
+                                    alternativeText="Completed" onclick="{!c.completed}" />
+                            </aura:if>
+                            <aura:if isTrue="{!v.buttonCheck == false}">
+                                <lightning:buttonIcon class="done" value="{!task.Id}" iconName="utility:check"
+                                    alternativeText="Completed" onclick="{!c.completed}" />
+                            </aura:if>
+
+                        </td>
+
+                        <td class="dataRow" role="gridcell">
+                            <div class="slds-truncate" title="{!task.Name}">{!task.Name}</div>
+                        </td>
+                        <td class="slds-border_right" role="gridcell">
+                            <aura:if isTrue="{!v.buttonHabit == true}">
+                                <lightning:buttonIcon value="{!task.Id}" class="failed" iconName="utility:dash"
+                                    alternativeText="Failed" onclick="{!c.failedHabit}" />
+                            </aura:if>
+                            <aura:if isTrue="{!v.buttonFail == true}">
+                                <lightning:buttonIcon value="{!task.Id}" class="failed" iconName="utility:close"
+                                    alternativeText="Failed" aura:id="btnFld" onclick="{!c.failed}" />
+                            </aura:if>
+
+                        </td>
+
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+    </div>
+</aura:component>

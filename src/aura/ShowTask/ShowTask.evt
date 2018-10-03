@@ -1,0 +1,3 @@
+<aura:event access="global" type="APPLICATION" description="Mostrar Task for Contact">
+    <aura:attribute name="idContact" type="String" />
+</aura:event>
